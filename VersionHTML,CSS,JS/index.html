@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Devine le Nombre</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>🎮 Devine le Nombre</h1>
+
+        <div class="difficulty">
+            <label>Difficulté :</label>
+            <select id="difficulty">
+                <option value="easy">Facile (1-50)</option>
+                <option value="medium" selected>Moyen (1-100)</option>
+                <option value="hard">Difficile (1-200)</option>
+            </select>
+        </div>
+
+        <p id="range-info">Devine un nombre entre 1 et 100</p>
+
+        <input type="number" id="guessInput" placeholder="Entre un nombre">
+        <button id="guessBtn">Valider</button>
+
+        <p id="message"></p>
+        <p id="attempts"></p>
+
+        <button id="restartBtn" class="hidden">Rejouer</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
