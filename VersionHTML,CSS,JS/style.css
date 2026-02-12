@@ -28,10 +28,10 @@ button {
     cursor: pointer;
 }
 
-#pauseOptions {
-    margin-top: 10px;
-}
-
 .hidden {
     display: none;
+}
+
+#pauseOptions {
+    margin-top: 10px;
 }

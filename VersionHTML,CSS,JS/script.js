@@ -11,19 +11,19 @@ const message = document.getElementById("message");
 const attemptsText = document.getElementById("attempts");
 const restartBtn = document.getElementById("restartBtn");
 const rangeInfo = document.getElementById("range-info");
-const quitGameBtn = document.getElementById("quitGameBtn");
-
 
 const pauseBtn = document.getElementById("pauseBtn");
 const pauseOptions = document.getElementById("pauseOptions");
 const resumeBtn = document.getElementById("resumeBtn");
-const quitBtn = document.getElementById("quitBtn");
+const quitPauseBtn = document.getElementById("quitPauseBtn");
+const quitGameBtn = document.getElementById("quitGameBtn");
 
+// ======== Fonctions principales ========
 function startGame() {
     attempts = 0;
     gamePaused = false;
 
-    // Choix de la difficulté
+    // Gestion de la difficulté
     const diff = difficultySelect.value;
     switch (diff) {
         case "1": maxRange = 50; maxAttempts = 15; break;
@@ -37,13 +37,16 @@ function startGame() {
     rangeInfo.textContent = `Devine un nombre entre 1 et ${maxRange}`;
     message.textContent = "";
     attemptsText.textContent = `Essais : 0 / ${maxAttempts}`;
+
     guessInput.disabled = false;
+    guessInput.value = "";
+    guessInput.focus(); // focus automatique au démarrage
     guessBtn.disabled = false;
-    pauseBtn.disabled = false;
 
     pauseBtn.classList.remove("hidden");
     pauseOptions.classList.add("hidden");
     restartBtn.classList.add("hidden");
+    quitGameBtn.classList.remove("hidden"); // visible tout le temps sauf pause
 }
 
 function endGame() {
@@ -51,58 +54,17 @@ function endGame() {
     guessBtn.disabled = true;
     pauseBtn.disabled = true;
     restartBtn.classList.remove("hidden");
-    quitGameBtn.classList.remove("hidden");
 }
 
-// Quand le joueur clique sur quitter à la fin
-quitGameBtn.addEventListener("click", () => {
-    // Fermer la fenêtre si possible
-    window.close();
-
-    // Si ça ne fonctionne pas (navigation normale), on peut rediriger vers une page vide
-    window.location.href = "about:blank";
-});
-
-// 🎮 Gestion Pause
-pauseBtn.addEventListener("click", () => {
-    gamePaused = true;
-    message.textContent = "=== Jeu en pause ===";
-    guessInput.disabled = true;
-    guessBtn.disabled = true;
-
-    pauseBtn.classList.add("hidden");
-    pauseOptions.classList.remove("hidden");
-});
-
-// Reprendre
-resumeBtn.addEventListener("click", () => {
-    gamePaused = false;
-    message.textContent = "Reprise du jeu !";
-    guessInput.disabled = false;
-    guessBtn.disabled = false;
-
-    pauseOptions.classList.add("hidden");
-    pauseBtn.classList.remove("hidden");
-});
-
-// Quitter
-quitBtn.addEventListener("click", () => {
-    gamePaused = false;
-    message.textContent = "Tu as quitté la partie !";
-    endGame();
-
-    pauseOptions.classList.add("hidden");
-    pauseBtn.classList.remove("hidden");
-});
-
-// Validation du nombre
-guessBtn.addEventListener("click", () => {
+// ======== Gestion du jeu ========
+function validateGuess() {
     if (gamePaused) return;
 
-    const guess = Number(guessInput.value);
+    const guess = Number(guessInput.value.trim());
 
-    if (!guess || guess < 1 || guess > maxRange) {
-        message.textContent = `Erreur : entre un nombre entre 1 et ${maxRange}`;
+    if (!Number.isInteger(guess) || guess < 1 || guess > maxRange) {
+        message.textContent = `Erreur : entre un nombre entier entre 1 et ${maxRange}`;
+        guessInput.focus();
         return;
     }
 
@@ -125,11 +87,59 @@ guessBtn.addEventListener("click", () => {
 
     attemptsText.textContent = `Essais : ${attempts} / ${maxAttempts}`;
     guessInput.value = "";
+    guessInput.focus();
+}
+
+// Validation avec le bouton
+guessBtn.addEventListener("click", validateGuess);
+
+// Validation avec la touche Entrée
+guessInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        validateGuess();
+    }
 });
 
-// Rejouer et changer la difficulté
+// ======== Gestion Pause ========
+pauseBtn.addEventListener("click", () => {
+    gamePaused = true;
+    message.textContent = "=== Jeu en pause ===";
+    guessInput.disabled = true;
+    guessBtn.disabled = true;
+
+    pauseBtn.classList.add("hidden");        // cacher Pause
+    pauseOptions.classList.remove("hidden"); // montrer menu pause
+    quitGameBtn.classList.add("hidden");     // cacher Quitter principal
+});
+
+resumeBtn.addEventListener("click", () => {
+    gamePaused = false;
+    message.textContent = "Reprise du jeu !";
+    guessInput.disabled = false;
+    guessBtn.disabled = false;
+
+    pauseOptions.classList.add("hidden");    // cacher menu pause
+    pauseBtn.classList.remove("hidden");     // réafficher Pause
+    quitGameBtn.classList.remove("hidden");  // réafficher Quitter principal
+    guessInput.focus();                       // focus après reprise
+});
+
+quitPauseBtn.addEventListener("click", () => {
+    message.textContent = "Tu as quitté la partie !";
+    endGame();
+    pauseOptions.classList.add("hidden");
+    quitGameBtn.classList.remove("hidden"); // réaffiche Quitter principal
+});
+
+// ======== Quitter principal ========
+quitGameBtn.addEventListener("click", () => {
+    window.close();
+    window.location.href = "about:blank";
+});
+
+// ======== Rejouer et changer difficulté ========
 restartBtn.addEventListener("click", startGame);
 difficultySelect.addEventListener("change", startGame);
 
-// Démarrage initial
+// ======== Démarrage initial ========
 startGame();

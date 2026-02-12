@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="game-container">
-        <h1>🎮 Devine le Nombre</h1>
+        <h1>🎮 Deviner le Nombre</h1>
 
         <div class="difficulty">
             <label>Choisis la difficulté :</label>
@@ -22,20 +22,19 @@
 
         <input type="number" id="guessInput" placeholder="Entre un nombre">
         <button id="guessBtn">Valider</button>
+        <button id="pauseBtn">Pause</button>
+        <button id="quitGameBtn">Quitter le jeu</button>
 
         <p id="message"></p>
         <p id="attempts"></p>
 
-        <button id="pauseBtn">Pause</button>
-
+        <!-- Menu Pause -->
         <div id="pauseOptions" class="hidden">
             <button id="resumeBtn">Reprendre</button>
-            <button id="quitBtn">Quitter</button>
+            <button id="quitPauseBtn">Quitter</button>
         </div>
 
         <button id="restartBtn" class="hidden">Rejouer</button>
-        <button id="quitGameBtn" class="hidden">Quitter</button>
-
     </div>
 
     <script src="script.js"></script>
