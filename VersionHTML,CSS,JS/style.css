@@ -13,7 +13,7 @@ body {
     padding: 30px;
     border-radius: 10px;
     text-align: center;
-    width: 300px;
+    width: 350px;
 }
 
 input {
@@ -26,6 +26,10 @@ button {
     padding: 8px 15px;
     margin: 5px;
     cursor: pointer;
+}
+
+#pauseOptions {
+    margin-top: 10px;
 }
 
 .hidden {

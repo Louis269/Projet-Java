@@ -6,20 +6,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="game-container">
         <h1>🎮 Devine le Nombre</h1>
 
         <div class="difficulty">
-            <label>Difficulté :</label>
+            <label>Choisis la difficulté :</label>
             <select id="difficulty">
-                <option value="easy">Facile (1-50)</option>
-                <option value="medium" selected>Moyen (1-100)</option>
-                <option value="hard">Difficile (1-200)</option>
+                <option value="1">Facile (1-50, 15 essais)</option>
+                <option value="2" selected>Moyen (1-100, 10 essais)</option>
+                <option value="3">Difficile (1-200, 7 essais)</option>
             </select>
         </div>
 
-        <p id="range-info">Devine un nombre entre 1 et 100</p>
+        <p id="range-info"></p>
 
         <input type="number" id="guessInput" placeholder="Entre un nombre">
         <button id="guessBtn">Valider</button>
@@ -27,7 +26,16 @@
         <p id="message"></p>
         <p id="attempts"></p>
 
+        <button id="pauseBtn">Pause</button>
+
+        <div id="pauseOptions" class="hidden">
+            <button id="resumeBtn">Reprendre</button>
+            <button id="quitBtn">Quitter</button>
+        </div>
+
         <button id="restartBtn" class="hidden">Rejouer</button>
+        <button id="quitGameBtn" class="hidden">Quitter</button>
+
     </div>
 
     <script src="script.js"></script>
