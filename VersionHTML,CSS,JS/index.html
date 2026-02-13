@@ -5,38 +5,38 @@
     <title>Devinez le Nombre</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="game-container">
-        <h1>🎮 Devinez le Nombre</h1>
+    <body>
+        <div class="game-container">
+            <h1>🎮 Devinez le Nombre</h1>
 
-        <div class="difficulty">
-            <label>Choisis la difficulté :</label>
-            <select id="difficulty">
-                <option value="1">Facile (1-50, 15 essais)</option>
-                <option value="2" selected>Moyen (1-100, 10 essais)</option>
-                <option value="3">Difficile (1-200, 7 essais)</option>
-            </select>
+            <div class="difficulty">
+                <label>Choisis la difficulté :</label>
+                <select id="difficulty">
+                    <option value="1">Facile (1-50, 15 essais)</option>
+                    <option value="2" selected>Moyen (1-100, 10 essais)</option>
+                    <option value="3">Difficile (1-200, 7 essais)</option>
+                </select>
+            </div>
+
+            <p id="range-info"></p>
+
+            <input type="number" id="guessInput" placeholder="Entre un nombre">
+            <button id="guessBtn">Valider</button>
+            <button id="pauseBtn">Pause</button>
+            <button id="quitGameBtn">Quitter le jeu</button>
+
+            <p id="message"></p>
+            <p id="attempts"></p>
+
+            <!-- Menu Pause -->
+            <div id="pauseOptions" class="hidden">
+                <button id="resumeBtn">Reprendre</button>
+                <button id="quitPauseBtn">Quitter</button>
+            </div>
+
+            <button id="restartBtn" class="hidden">Rejouer</button>
         </div>
 
-        <p id="range-info"></p>
-
-        <input type="number" id="guessInput" placeholder="Entre un nombre">
-        <button id="guessBtn">Valider</button>
-        <button id="pauseBtn">Pause</button>
-        <button id="quitGameBtn">Quitter le jeu</button>
-
-        <p id="message"></p>
-        <p id="attempts"></p>
-
-        <!-- Menu Pause -->
-        <div id="pauseOptions" class="hidden">
-            <button id="resumeBtn">Reprendre</button>
-            <button id="quitPauseBtn">Quitter</button>
-        </div>
-
-        <button id="restartBtn" class="hidden">Rejouer</button>
-    </div>
-
-    <script src="script.js"></script>
-</body>
+        <script src="script.js"></script>
+    </body>
 </html>
